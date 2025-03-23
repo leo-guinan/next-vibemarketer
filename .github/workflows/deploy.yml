@@ -10,7 +10,7 @@ env:
   PROJECT_ID: leoai-nexus-data-lake
   REGION: us-central1
   SERVICE_NAME: next-vibemarketer
-  IMAGE: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/next-vibemarketer/${{ env.SERVICE_NAME }}
+  IMAGE: ${{ vars.REGION }}-docker.pkg.dev/${{ vars.PROJECT_ID }}/next-vibemarketer/${{ vars.SERVICE_NAME }}
 
 jobs:
   deploy:
@@ -35,18 +35,18 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
 
       - name: Configure Docker
-        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
+        run: gcloud auth configure-docker ${{ vars.REGION }}-docker.pkg.dev
 
       - name: Build and Push Container
         run: |
-          docker build -t ${{ env.IMAGE }}:${{ github.sha }} .
-          docker push ${{ env.IMAGE }}:${{ github.sha }}
+          docker build -t ${{ vars.IMAGE }}:${{ github.sha }} .
+          docker push ${{ vars.IMAGE }}:${{ github.sha }}
 
       - name: Deploy to Cloud Run
         run: |
-          gcloud run deploy ${{ env.SERVICE_NAME }} \
-            --image ${{ env.IMAGE }}:${{ github.sha }} \
+          gcloud run deploy ${{ vars.SERVICE_NAME }} \
+            --image ${{ vars.IMAGE }}:${{ github.sha }} \
             --platform managed \
-            --region ${{ env.REGION }} \
-            --project ${{ env.PROJECT_ID }} \
+            --region ${{ vars.REGION }} \
+            --project ${{ vars.PROJECT_ID }} \
             --allow-unauthenticated 
