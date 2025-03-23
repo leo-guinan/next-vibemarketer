@@ -10,8 +10,8 @@ interface StreamerProps {
 export default function Streamer({ roomId, isHost = false }: StreamerProps) {
   const [peers, setPeers] = useState<{ [key: string]: Peer.Instance }>({})
   const [stream, setStream] = useState<MediaStream | null>(null)
-  const socketRef = useRef<Socket>()
-  const streamRef = useRef<MediaStream>()
+  const socketRef = useRef<Socket | null>(null)
+  const streamRef = useRef<MediaStream | null>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
@@ -109,7 +109,7 @@ export default function Streamer({ roomId, isHost = false }: StreamerProps) {
       Object.values(peers).forEach((peer) => peer.destroy())
       socketRef.current?.disconnect()
     }
-  }, [roomId, isHost])
+  }, [roomId, isHost, peers, stream])
 
   return (
     <div className="relative w-full aspect-video bg-gray-900 rounded-lg overflow-hidden">
