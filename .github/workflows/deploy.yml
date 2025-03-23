@@ -10,7 +10,7 @@ env:
   PROJECT_ID: leoai-nexus-data-lake
   REGION: us-central1
   SERVICE_NAME: next-vibemarketer
-  IMAGE: ${{ github.run_id }}-docker.pkg.dev/${{ github.repository_owner }}/${{ github.event.repository.name }}/${{ github.event.repository.name }}
+  IMAGE: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/next-vibemarketer/${{ env.SERVICE_NAME }}
 
 jobs:
   deploy:
