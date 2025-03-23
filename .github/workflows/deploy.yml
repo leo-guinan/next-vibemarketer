@@ -11,6 +11,8 @@ env:
   REGION: us-central1
   SERVICE_NAME: next-vibemarketer
   IMAGE: us-central1-docker.pkg.dev/leoai-nexus-data-lake/next-vibemarketer/next-vibemarketer
+  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+  ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
 jobs:
   deploy:
@@ -49,4 +51,5 @@ jobs:
             --platform managed \
             --region ${{ env.REGION }} \
             --project ${{ env.PROJECT_ID }} \
+            --set-env-vars="OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }},ANTHROPIC_API_KEY=${{ secrets.ANTHROPIC_API_KEY }}" \
             --allow-unauthenticated 
