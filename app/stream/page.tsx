@@ -1,51 +1,28 @@
 'use client'
 
-import ReactPlayer from 'react-player'
-import { useState } from 'react'
+import { useSearchParams } from 'next/navigation'
+import Streamer from '../components/Streamer'
 
 export default function StreamPage() {
-  const [streamKey, setStreamKey] = useState('test')
-  const streamUrl = `http://localhost:8000/live/${streamKey}/index.m3u8`
+  const searchParams = useSearchParams()
+  const roomId = searchParams.get('room') || 'default'
+  const isHost = searchParams.get('host') === 'true'
 
   return (
-    <div className="min-h-screen bg-gray-900 p-8">
+    <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-4">Live Stream</h1>
-          <div className="flex gap-4 items-center">
-            <input
-              type="text"
-              value={streamKey}
-              onChange={(e) => setStreamKey(e.target.value)}
-              className="px-4 py-2 rounded bg-gray-800 text-white border border-gray-700 focus:outline-none focus:border-blue-500"
-              placeholder="Stream Key"
-            />
-            <div className="text-gray-400">
-              RTMP URL: rtmp://localhost:1935/live
-            </div>
+        <h1 className="text-2xl font-bold mb-4">
+          {isHost ? 'Broadcasting' : 'Viewing'} Stream
+        </h1>
+        <Streamer roomId={roomId} isHost={isHost} />
+        {isHost && (
+          <div className="mt-4 p-4 bg-gray-100 rounded-lg">
+            <p className="text-sm">Share this URL with viewers:</p>
+            <code className="block mt-2 p-2 bg-white rounded border">
+              {`${window.location.origin}/stream?room=${roomId}`}
+            </code>
           </div>
-        </div>
-
-        <div className="aspect-video bg-black rounded-lg overflow-hidden">
-          <ReactPlayer
-            url={streamUrl}
-            width="100%"
-            height="100%"
-            playing
-            controls
-            config={{
-              file: {
-                attributes: {
-                  style: {
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'contain'
-                  }
-                }
-              }
-            }}
-          />
-        </div>
+        )}
       </div>
     </div>
   )

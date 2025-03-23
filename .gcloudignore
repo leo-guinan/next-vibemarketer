@@ -1,0 +1,13 @@
+# Ignore everything
+*
+
+# Allow only the necessary files
+!package.json
+!pnpm-lock.yaml
+!server.js
+!app/
+!.next/
+!public/
+!node_modules/
+!Dockerfile
+!.dockerignore 

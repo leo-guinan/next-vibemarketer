@@ -36,7 +36,6 @@ COPY --from=builder /app/node_modules ./node_modules
 
 # Set environment variables
 ENV NODE_ENV=production
-ENV PORT=8080
 
 # Expose port
 EXPOSE 8080

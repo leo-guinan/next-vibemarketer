@@ -15,10 +15,12 @@
     "@mastra/core": "^0.6.3",
     "ai": "^4.2.0",
     "next": "15.2.3",
-    "node-media-server": "^4.0.12",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-player": "^2.16.0",
+    "simple-peer": "^9.11.1",
+    "@types/simple-peer": "^9.11.8",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
     "zod": "^3.24.2"
   },
   "devDependencies": {
