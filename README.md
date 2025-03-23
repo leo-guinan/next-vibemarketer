@@ -66,3 +66,38 @@ For deployment to work with GitHub Actions, you need to add the following secret
    - `GCP_SA_EMAIL` (for Google Cloud authentication)
 
 The deployment workflow will automatically use these secrets during the build and deployment process.
+
+## Deployment Logs & Validation
+
+### View Latest Deployment Logs
+```bash
+# View logs from the latest revision
+gcloud run services logs read next-vibemarketer --region us-central1 --limit=100
+
+# Stream logs in real-time
+gcloud run services logs tail next-vibemarketer --region us-central1
+```
+
+### Log Validation
+Create a log validation script to check server startup:
+
+```bash
+#!/bin/bash
+# scripts/validate-deploy.sh
+
+# Wait for logs to appear and validate startup
+gcloud run services logs read next-vibemarketer \
+  --region us-central1 \
+  --limit=50 \
+  | grep -q "> Ready on http" && echo "Server started successfully" || echo "Server startup failed"
+```
+
+Make the script executable:
+```bash
+chmod +x scripts/validate-deploy.sh
+```
+
+Add this validation step to your deployment process by running:
+```bash
+./scripts/validate-deploy.sh
+```

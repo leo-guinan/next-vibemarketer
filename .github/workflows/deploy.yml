@@ -52,4 +52,9 @@ jobs:
             --region ${{ env.REGION }} \
             --project ${{ env.PROJECT_ID }} \
             --set-env-vars="OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }},ANTHROPIC_API_KEY=${{ secrets.ANTHROPIC_API_KEY }}" \
-            --allow-unauthenticated 
+            --allow-unauthenticated
+
+      - name: Validate Deployment
+        run: |
+          chmod +x scripts/validate-deploy.sh
+          ./scripts/validate-deploy.sh 
