@@ -43,8 +43,9 @@ app.prepare().then(() => {
   })
 
   const port = process.env.PORT || 8080
-  server.listen(port, (err) => {
+  const host = '0.0.0.0'
+  server.listen(port, host, (err) => {
     if (err) throw err
-    console.log(`> Ready on http://localhost:${port}`)
+    console.log(`> Ready on http://${host}:${port}`)
   })
 }) 

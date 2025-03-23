@@ -9,7 +9,7 @@ check_logs() {
     gcloud run services logs read next-vibemarketer \
         --region us-central1 \
         --limit=50 2>/dev/null \
-        | grep -q "> Ready on http"
+        | grep -q "> Ready on http://0.0.0.0"
     return $?
 }
 
