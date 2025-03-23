@@ -1,9 +1,10 @@
 'use client'
 
+import { Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Streamer from '../components/Streamer'
 
-export default function StreamPage() {
+function StreamContent() {
   const searchParams = useSearchParams()
   const roomId = searchParams.get('room') || 'default'
   const isHost = searchParams.get('host') === 'true'
@@ -25,5 +26,13 @@ export default function StreamPage() {
         )}
       </div>
     </div>
+  )
+}
+
+export default function StreamPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <StreamContent />
+    </Suspense>
   )
 } 

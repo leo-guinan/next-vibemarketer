@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
+    "dev": "next dev",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -13,12 +13,12 @@
     "@ai-sdk/openai": "^1.3.0",
     "@ai-sdk/react": "^1.2.0",
     "@mastra/core": "^0.6.3",
-    "ai": "^4.2.0",
-    "next": "15.2.3",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "simple-peer": "^9.11.1",
     "@types/simple-peer": "^9.11.8",
+    "ai": "^4.2.0",
+    "next": "14.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "simple-peer": "^9.11.1",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",
     "zod": "^3.24.2"
@@ -27,10 +27,10 @@
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "eslint": "^9",
-    "eslint-config-next": "15.2.3",
+    "eslint-config-next": "14.1.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
